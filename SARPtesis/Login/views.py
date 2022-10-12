@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -22,9 +23,7 @@ def signin(request):
             login(request, user)
             return redirect('index')
     
+# Home
+@login_required
 def home(request):
-    user = request.user
-    if user == None:
-        return redirect('login')
-    else:
-        return render(request, 'home.html')
+    return render(request, 'home.html')
