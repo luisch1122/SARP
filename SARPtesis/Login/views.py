@@ -34,16 +34,25 @@ def signout(request):
     logout(request)
     return redirect('login')
 
-# Personal
+# staff
 @login_required
 def staff(request):
     return render(request, 'staff.html')
 
-# Evaluaciones
+# evaluation
 @login_required
 def evaluations(request):
     return render(request, 'evaluations.html')
 
+# users
+@login_required
 def users(request):
     users = User.objects.all()
     return render(request, 'users.html', {'users': users})
+
+# Users edit
+@login_required
+def user_edit(request, id):
+    user = get_object_or_404(User, pk=id)
+    if request.method == 'GET':
+        return render(request, 'user_edit.html', {'user': user})
