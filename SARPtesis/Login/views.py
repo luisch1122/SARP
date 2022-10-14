@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -35,10 +36,14 @@ def signout(request):
 
 # Personal
 @login_required
-def personal(request):
-    return render(request, 'personal.html')
+def staff(request):
+    return render(request, 'staff.html')
 
 # Evaluaciones
 @login_required
-def evaluaciones(request):
-    return render(request, 'evaluaciones.html')
+def evaluations(request):
+    return render(request, 'evaluations.html')
+
+def users(request):
+    users = User.objects.all()
+    return render(request, 'users.html', {'users': users})
