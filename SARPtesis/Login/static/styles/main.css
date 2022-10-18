@@ -1,14 +1,6 @@
-.Login{
-    background-color: rgb(245, 252, 185);
-    border: 1px solid black;
-    text-align: center;
-    width: 300px;
-    margin: auto;
-    padding: 3% 0 3% 0;
-}
 
 body {
-    background-image: url("images/fondo.jpg");
-    background-color: rgb(65, 65, 65); 
+    background-image: url("fondo.jpg");
+    background-size: cover;
 }
 

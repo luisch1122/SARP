@@ -11,30 +11,35 @@
     {% extends 'base.html' %}
     {% block content %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Nombre de Usuario</th>
-                <th scope="col">Email</th>
-                <th scope="col">Ultima conexión</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{user.first_name}}</td>
-                <td>{{user.username}}</td>
-                <td>{{user.email}}</td>
-                <td>{{user.last_login}}</td>
-                <td><a class="btn btn-primary" href="{% url 'user_edit' user.id %}">Editar</a></td>
-                <td><button class="btn btn-danger">Eliminar</button></td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <main class="container bg-light rounded mt-3 shadow p-3 mb-5 bg-body rounded">
+        <a class="btn btn-success" href="">
+            Crear Usuario
+        </a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Nombre de Usuario</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Ultima conexión</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{user.first_name}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.last_login}}</td>
+                    <td><a class="btn btn-primary" href="{% url 'user_edit' user.id %}">Editar</a></td>
+                    <td><button class="btn btn-danger">Eliminar</button></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </main>
 
     {% endblock %}
 </body>

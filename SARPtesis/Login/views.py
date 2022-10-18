@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
@@ -53,6 +53,18 @@ def users(request):
 # Users edit
 @login_required
 def user_edit(request, id):
-    user = get_object_or_404(User, pk=id)
     if request.method == 'GET':
-        return render(request, 'user_edit.html', {'user': user})
+        user = get_object_or_404(User, pk=id)
+        form = UserChangeForm(instance=user)
+        return render(request, 'user_edit.html', {'user': user, 'form': form})
+    else:
+        try:
+            # No esta almacenando los datos enviados
+            user = get_object_or_404(User, pk=id)
+            form = UserChangeForm(request.POST)
+            form.save()
+            return redirect('users')
+        except:
+            return render(request, 'user_edit.html', {'user': user, 'form': form,
+            'error': 'Error al modificar'} 
+            )
