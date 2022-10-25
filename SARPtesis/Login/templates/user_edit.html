@@ -17,50 +17,27 @@
                 <p>{{users.username}}</p>
                 <h1>Editar usuario {{user}}</h1>
                 <div class="mb-3">
-                    <label for="username">Usuario:</label>
-                    <input
-                    type="text"
-                    name="username"
-                    id="username" 
-                    class="form-control" 
-                    value="{{user.username}}"
-                    />
-                </div>
-
-                <div class="mb-3">
-                    <label for="first_name">Nombre:</label>
-                    <input
-                    type="text"
-                    name="first_name"
-                    id="first_name" 
-                    class="form-control" 
-                    value="{{user.first_name}}"
-                    />
-                </div>
-
-                <div class="mb-3">
-                    <label for="last_name">Apellido:</label>
-                    <input
-                    type="text"
-                    name="last_name"
-                    id="last_name" 
-                    class="form-control" 
-                    value="{{user.last_name}}"
-                    />
-                </div>
-
-                <div class="mb-3">
-                    <label for="email">Correo:</label>
+                    <label for="password1">Contraseña:</label>
                     <input 
-                    type="text"
-                    name="email"
-                    id="email"
-                    class="form-control"
-                    value="{{user.email}}"
-                    />
+                    type="password" 
+                    name="password1" 
+                    id="password1" 
+                    class="form-control" 
+                    placeholder="Escriba Contraseña">
                 </div>
+
+                <div class="mb-3">
+                    <label for="password2">Confirme la Contraseña:</label>
+                    <input 
+                    type="password" 
+                    name="password2" 
+                    id="password2" 
+                    class="form-control" 
+                    placeholder="Confirme la Contraseña">
+                </div>
+
                 <button class="btn btn-success">
-                    Actualizar
+                    Cambiar contraseña
                 </button>
             </div>
             

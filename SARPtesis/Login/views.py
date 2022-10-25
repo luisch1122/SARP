@@ -1,8 +1,10 @@
+import imp
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db import IntegrityError
 
 # Create your views here.
 
@@ -23,7 +25,74 @@ def signin(request):
         else:
             login(request, user)
             return redirect('index')
+
+# Sign up
+@login_required
+def signup(request):
+    if request.method == 'GET':
+        return render(request, 'create_user.html', {
+            'form': UserCreationForm
+        })
     
+    else:
+        if request.POST['password1'] == request.POST['password2']:
+            try:
+                # register user
+                user = User.objects.create_user(
+                    username=request.POST['username'], 
+                    password=request.POST['password1'],
+                    first_name=request.POST['first_name'],
+                    last_name=request.POST['last_name'],
+                    email=request.POST['email'],
+                    )
+                user.save()
+                return redirect('users')
+
+            except IntegrityError:
+                return render(request, 'create_user.html', {
+                    'form': UserCreationForm,
+                    "error": "Username already exists"
+                })
+
+        return render(request, 'create_user.html', {
+            'form': UserCreationForm,
+            "error": "Password do not match"
+        })
+
+#Delete users
+@login_required
+def delete_user(request, id):
+    user = get_object_or_404(User, pk=id)
+    if user:
+        user.delete()
+        return redirect('users')
+
+@login_required
+def users(request):
+    users = User.objects.all()
+    return render(request, 'users.html', {'users': users})
+
+# Users edit
+@login_required
+def user_edit(request, id):
+    if request.method == 'GET':
+        user = get_object_or_404(User, pk=id)
+        return render(request, 'user_edit.html')
+
+    else:
+        if request.POST['password1'] == request.POST['password2']:
+            try:
+                user = User.objects.update(
+                    password=request.POST['password1']
+                )
+                user.save()
+                return redirect('users')
+
+            except:
+                return render(request, 'user_edit.html', {
+                'form': PasswordChangeForm,
+                "error": "Contraseña no es igual"
+                })
 # Home
 @login_required
 def home(request):
@@ -45,26 +114,3 @@ def evaluations(request):
     return render(request, 'evaluations.html')
 
 # users
-@login_required
-def users(request):
-    users = User.objects.all()
-    return render(request, 'users.html', {'users': users})
-
-# Users edit
-@login_required
-def user_edit(request, id):
-    if request.method == 'GET':
-        user = get_object_or_404(User, pk=id)
-        form = UserChangeForm(instance=user)
-        return render(request, 'user_edit.html', {'user': user, 'form': form})
-    else:
-        try:
-            # No esta almacenando los datos enviados
-            user = get_object_or_404(User, pk=id)
-            form = UserChangeForm(request.POST)
-            form.save()
-            return redirect('users')
-        except:
-            return render(request, 'user_edit.html', {'user': user, 'form': form,
-            'error': 'Error al modificar'} 
-            )

@@ -12,7 +12,7 @@
     {% block content %}
 
     <main class="container bg-light rounded mt-3 shadow p-3 mb-5 bg-body rounded">
-        <a class="btn btn-success" href="">
+        <a class="btn btn-success" href="{% url 'sign_up'%}">
             Crear Usuario
         </a>
         <table class="table">
@@ -34,7 +34,7 @@
                     <td>{{user.email}}</td>
                     <td>{{user.last_login}}</td>
                     <td><a class="btn btn-primary" href="{% url 'user_edit' user.id %}">Editar</a></td>
-                    <td><button class="btn btn-danger">Eliminar</button></td>
+                    <td><a class="btn btn-danger" href="{% url 'delete_user' user.id %}">Eliminar</a></td>
                 </tr>
             {% endfor %}
             </tbody>
