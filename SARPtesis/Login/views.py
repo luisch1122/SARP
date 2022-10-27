@@ -1,4 +1,3 @@
-import imp
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, UserCreationForm
@@ -75,24 +74,11 @@ def users(request):
 # Users edit
 @login_required
 def user_edit(request, id):
-    if request.method == 'GET':
-        user = get_object_or_404(User, pk=id)
-        return render(request, 'user_edit.html')
 
-    else:
-        if request.POST['password1'] == request.POST['password2']:
-            try:
-                user = User.objects.update(
-                    password=request.POST['password1']
-                )
-                user.save()
-                return redirect('users')
-
-            except:
-                return render(request, 'user_edit.html', {
-                'form': PasswordChangeForm,
-                "error": "Contraseña no es igual"
-                })
+    
+    return render(request, 'user_edit.html')
+    # user: alberto cont: Luisch1122
+        
 # Home
 @login_required
 def home(request):
