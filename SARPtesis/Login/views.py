@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, Us
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
+from Login.models import Department
 
 # Create your views here.
 
@@ -73,7 +74,7 @@ def users(request):
 
 # Users edit
 @login_required
-def user_edit(request, id):
+def user_edit(request):
 
     
     return render(request, 'user_edit.html')
@@ -82,6 +83,8 @@ def user_edit(request, id):
 # Home
 @login_required
 def home(request):
+    user = request.user
+    print(user)
     return render(request, 'home.html')
 
 # Logout
@@ -89,10 +92,18 @@ def signout(request):
     logout(request)
     return redirect('login')
 
+# Departament
+@login_required
+def departament(request):
+    departs = Department.objects.all()
+    return render(request, 'departament.html', {'departs':departs})
+
 # staff
 @login_required
-def staff(request):
-    return render(request, 'staff.html')
+def staff(request, id):
+    departs = get_object_or_404(Department, pk=id)
+    print(departs)
+    return render(request, 'staff.html', {'departs':departs})
 
 # evaluation
 @login_required
