@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creacion de usuarios</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+    <main class="container bg-light rounded mt-3 shadow p-3 mb-5 bg-body rounded">
+        <form action="" method="POST">
+            {{error}}
+            {% csrf_token %}
+            <div class="mb-3">
+                <h1>Agregar/Modificar Empleado</h1>
+
+                {{form}}
+
+                <button class="btn btn-success m-3">
+                    Completado
+                </button> 
+            </div>
+            
+        </form>
+    </main>
+    {% endblock %}
+</body>
+</html>

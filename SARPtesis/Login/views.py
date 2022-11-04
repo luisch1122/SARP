@@ -4,7 +4,8 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, Us
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from Login.models import Department
+from Login.models import Department, Staff
+from .forms import StaffForm
 
 # Create your views here.
 
@@ -102,8 +103,39 @@ def departament(request):
 @login_required
 def staff(request, id):
     departs = get_object_or_404(Department, pk=id)
-    print(departs)
-    return render(request, 'staff.html', {'departs':departs})
+    staff = Staff.objects.filter(management = id)
+    print(staff)
+    return render(request, 'staff.html', {'departs':departs, 'staffs':staff})
+
+# Create staff
+@login_required
+def create_staff(request):
+    if request.method == 'GET':
+        return render(request, 'create_staff.html', {'form':StaffForm})
+    else:
+        form = StaffForm(request.POST)
+        form.save()
+        return redirect('departament')
+
+@login_required
+def edit_staff(request, id):
+    if request.method == 'GET':
+        staff = get_object_or_404(Staff, pk=id)
+        form = StaffForm(instance=staff)
+        return render(request, 'create_staff.html', {'form':form})
+    else:
+        staff = get_object_or_404(Staff, pk=id)
+        form = StaffForm(request.POST, instance=staff)
+        form.save()
+        return redirect('departament')
+
+#Delete staff
+@login_required
+def delete_staff(request, id):
+    staff = get_object_or_404(Staff, pk=id)
+    if staff:
+        staff.delete()
+        return redirect('departament')
 
 # evaluation
 @login_required

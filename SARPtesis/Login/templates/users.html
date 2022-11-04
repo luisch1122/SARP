@@ -33,7 +33,6 @@
                     <td>{{user.username}}</td>
                     <td>{{user.email}}</td>
                     <td>{{user.last_login}}</td>
-                    <!-- <td><a class="btn btn-primary" href="{% url 'user_edit' user.id %}">Editar</a></td> -->
                     <td><a class="btn btn-danger" href="{% url 'delete_user' user.id %}">Eliminar</a></td>
                 </tr>
             {% endfor %}

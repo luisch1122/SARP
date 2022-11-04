@@ -13,6 +13,37 @@
 
     <main class="container bg-light rounded mt-3 shadow p-3 mb-5 bg-body rounded">
         <h1>{{departs}}</h1>
+        <a class="btn btn-success" href="{% url 'create_staff'%}">
+            Agregar Personal
+        </a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Puesto</th>
+                    <th scope="col">Evaluación</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for staff in staffs %}
+                <tr>
+                    <td>{{staff.name}}</td>
+                    <td>{{staff.last_name}}</td>
+                    <td>{{staff.email}}</td>
+                    <td>{{staff.number}}</td>
+                    <td>{{staff.jobs}}</td>
+                    <td></td>
+                    <td><a class="btn btn-info" href="{% url 'edit_staff' staff.id%}">Modificar</a></td>
+                    <td><a class="btn btn-danger" href="{% url 'delete_staff' staff.id%}">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
     </main>
     
 
