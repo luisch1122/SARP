@@ -12,7 +12,24 @@
 
     <main class="container bg-light rounded mt-3 shadow p-3 mb-5 bg-body rounded">
         <h1>Evaluaciones</h1>
-        <a class="btn btn-success" href="">Crear Evaluaciones</a>
+        <a class="btn btn-success" href="{% url 'create_evaluation' %}">
+            Crear Evaluaciones
+        </a>
+    <div class="row">
+        {% for eval in evals %}
+        <div class="col-auto mt-2 ">
+            <div class="card" style="width: 25rem;">
+                <div class="card-body">
+                <h5 class="card-title">{{eval}}</h5>
+                <div class="card-text">{{eval.description}}</div>
+                <a href="#" class="btn btn-success mb-1 mt-2">Responder</a>
+                <a href="{% url 'create_question' eval.id %}" class="btn btn-primary mb-1 mt-2">Agregar preguntas</a>
+                <a href="#" class="btn btn-danger mb-1 mt-2">Eliminar </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
     </main>
 
     {% endblock %}

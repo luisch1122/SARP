@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.db import IntegrityError
-from Login.models import Department, Staff
-from .forms import StaffForm
+from Login.models import Department, Staff, Evaluation, Questions
+from .forms import StaffForm, EvalForm, QuestForm
 
 # Create your views here.
 
@@ -76,8 +76,6 @@ def users(request):
 # Users edit
 @login_required
 def user_edit(request):
-
-    
     return render(request, 'user_edit.html')
     # user: alberto cont: Luisch1122
         
@@ -140,6 +138,33 @@ def delete_staff(request, id):
 # evaluation
 @login_required
 def evaluations(request):
-    return render(request, 'evaluations.html')
+    eval = Evaluation.objects.all()
+    return render(request, 'evaluations.html', {'evals': eval})
 
-# users
+# Create evaluation
+@login_required
+def create_evaluation(request):
+    if request.method == 'GET':
+        return render(request, 'create_evaluation.html', {'form':EvalForm})
+    else:
+        form = EvalForm(request.POST)
+        form.save()
+        return redirect('evaluations')
+
+# Create question
+@login_required
+def create_question(request, id):
+    if request.method == 'GET':   
+        return render(request, 'create_question.html', {'form':QuestForm(), 'id':id})
+    else:
+        print('valor:', request.POST)
+        quest = Questions.objects.create(
+            question=request.POST['question'],
+            value=request.POST['value'],
+        )
+        instance = quest
+        instance.evaluations = Evaluation(id)
+        instance.save()
+        return redirect('evaluations')
+
+        

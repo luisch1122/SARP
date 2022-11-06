@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+
+    <main class="container bg-light rounded mt-3 shadow p-3 mb-5 bg-body rounded">
+        <h1>Crear Preguntas</h1>
+        <form action="" method="POST">
+            {{error}}
+            {% csrf_token %}
+            {{form}}
+            <!-- <div class="mb-3"> 
+                <label for="question" class="form-label">Pregunta</label>
+                <input type="text" class="form-control" id="question" placeholder="Preguntas">
+            </div>
+            <div class="mb-3"> 
+                <label for="value" class="form-label">Valor</label>
+                <input type="number" class="form-control" id="value" placeholder="Valor">
+            </div>
+            <div class="mb-3">
+                <label for="evaluations" class="col-sm-2 col-form-label">Evaluacion</label>
+                <input class="form-control" type="number" value="{{id}}" readonly>
+            </div> -->
+            <button class="btn btn-success m-3">
+                Completado
+            </button> 
+        </form>
+    </main>    
+
+    {% endblock %}
+</body>
+</html>
