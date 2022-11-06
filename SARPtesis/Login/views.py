@@ -151,6 +151,14 @@ def create_evaluation(request):
         form.save()
         return redirect('evaluations')
 
+# Delete evaluation
+@login_required
+def delete_evaluation(request, id):
+    eval = get_object_or_404(Evaluation, pk=id)
+    if eval:
+        eval.delete()
+        return redirect('evaluations')
+
 # Create question
 @login_required
 def create_question(request, id):
@@ -166,5 +174,7 @@ def create_question(request, id):
         instance.evaluations = Evaluation(id)
         instance.save()
         return redirect('evaluations')
+
+
 
         

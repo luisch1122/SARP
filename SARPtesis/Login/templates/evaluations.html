@@ -22,9 +22,9 @@
                 <div class="card-body">
                 <h5 class="card-title">{{eval}}</h5>
                 <div class="card-text">{{eval.description}}</div>
-                <a href="#" class="btn btn-success mb-1 mt-2">Responder</a>
+                <a href="" class="btn btn-success mb-1 mt-2">Responder</a>
                 <a href="{% url 'create_question' eval.id %}" class="btn btn-primary mb-1 mt-2">Agregar preguntas</a>
-                <a href="#" class="btn btn-danger mb-1 mt-2">Eliminar </a>
+                <a href="{% url 'delete_evaluation' eval.id %}" class="btn btn-danger mb-1 mt-2">Eliminar </a>
                 </div>
             </div>
         </div>
