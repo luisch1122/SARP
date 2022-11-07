@@ -175,6 +175,13 @@ def create_question(request, id):
         instance.save()
         return redirect('evaluations')
 
+# answer
+def answer(request, id):
+    eval = Evaluation.objects.get(pk=id)
+    depart = eval.department.id
+    staff = Staff.objects.filter(management = depart)
+    return render(request, 'answer.html', {'staffs':staff})
+
 
 
         

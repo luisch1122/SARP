@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+
+    <main class="container bg-light rounded mt-3 shadow p-3 mb-5 bg-body rounded" style="width: 500px;">
+        <h1>{{staffs.management}}</h1>
+        <h1>Personal con encuestas</h1>
+        
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for staff in staffs %}
+                <tr>
+                    <td>{{staff.name}}</td>
+                    <td>{{staff.last_name}}</td>
+                    <td><a class="btn btn-success" href="">Responder Evaluación</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </main>
+
+    {% endblock %}
+</body>
+</html>

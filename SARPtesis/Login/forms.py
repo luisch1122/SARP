@@ -17,9 +17,10 @@ class StaffForm(forms.ModelForm):
 class EvalForm(forms.ModelForm):
     class Meta:
         model = Evaluation
-        fields = ['title', 'complete']
+        fields = ['title', 'description', 'department']
         widgets ={
-            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Titulo de la evaluación'})
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Titulo de la evaluación'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Escribir descripción'})
         }
 
 class QuestForm(forms.ModelForm):

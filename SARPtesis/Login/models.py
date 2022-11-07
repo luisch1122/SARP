@@ -4,28 +4,10 @@ from django.db import models
 
 
 
-# Models Evaluations
-class Evaluation(models.Model):
-    title = models.CharField(max_length=300)
-    description = models.CharField(max_length=300, null=True)
-    complete = models.BooleanField()
-
-    def __str__(self):
-        return f'{self.title}'
-
-# Models Questions
-class Questions(models.Model):
-    question = models.CharField(max_length=300)
-    value = models.IntegerField()
-    evaluations = models.ForeignKey(Evaluation, on_delete=models.CASCADE, null=True, default=None)
-
-    def __str__(self):
-        return f'Pregunta {self.question} Valor {self.value} Evaluacion {self.evaluations}'
     
 # Models department
 class Department(models.Model):
     management = models.CharField(max_length=300)
-    evaluation = models.ForeignKey(Evaluation, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f'Departamento {self.management}'
@@ -42,3 +24,23 @@ class  Staff(models.Model):
 
     def __str__(self):
         return f'{self.name} {self.last_name}'
+
+
+# Models Evaluations
+class Evaluation(models.Model):
+    title = models.CharField(max_length=300)
+    description = models.CharField(max_length=300, null=True)
+    complete = models.BooleanField(null=True)
+    department = models.ForeignKey(Department(), on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return f'{self.title}'
+
+# Models Questions
+class Questions(models.Model):
+    question = models.CharField(max_length=300)
+    value = models.IntegerField()
+    evaluations = models.ForeignKey(Evaluation, on_delete=models.CASCADE, null=True, default=None)
+
+    def __str__(self):
+        return f'Pregunta {self.question} Valor {self.value} Evaluacion {self.evaluations}'

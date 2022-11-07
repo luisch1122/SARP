@@ -15,6 +15,7 @@ urlpatterns = [
     path('evaluaciones/crear', views.create_evaluation, name='create_evaluation'),
     path('evaluaciones/<int:id>/crear_preguntas', views.create_question, name='create_question'),
     path('evaluaciones/<int:id>/eliminar', views.delete_evaluation, name='delete_evaluation'),
+    path('evaluaciones/<int:id>/answer', views.answer, name='answer'),
     path('usuarios/', views.users, name='users'),
     path('usuarios/crear', views.signup, name='sign_up'), 
     path('usarios/<int:id>/delete', views.delete_user, name='delete_user'),
