@@ -2,8 +2,6 @@ from django.db import models
 
 # Create your models here.
 
-
-
     
 # Models department
 class Department(models.Model):
@@ -44,3 +42,9 @@ class Questions(models.Model):
 
     def __str__(self):
         return f'Pregunta {self.question} Valor {self.value} Evaluacion {self.evaluations}'
+
+# Models answers
+class Answers(models.Model):
+    answer = models.CharField(max_length=200)
+    value = models.IntegerField()
+    questions = models.ForeignKey(Questions, on_delete=models.CASCADE, null=True)
