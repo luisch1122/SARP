@@ -5,6 +5,14 @@ class StaffForm(forms.ModelForm):
     class Meta:
         model = Staff
         fields = ['name', 'last_name', 'email', 'number', 'jobs', 'management']
+        labels = {
+            'name': 'Nombre',
+            'last_name': 'Apellido',
+            'email': 'Email',
+            'number': 'Numero',
+            'jobs': 'Puesto',
+            'management': 'Departamento'
+        }
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre de Empleado'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Apellido de Empleado'}),

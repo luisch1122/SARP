@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, Us
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.db import IntegrityError
-from Login.models import Department, Staff, Evaluation, Questions
+from Login.models import Department, Staff, Evaluation, Questions, Answers
 from .forms import StaffForm, EvalForm, QuestForm
 
 # Create your views here.
@@ -176,12 +176,19 @@ def create_question(request, id):
         return redirect('evaluations')
 
 # answer
+@login_required
 def answer(request, id):
     eval = Evaluation.objects.get(pk=id)
     depart = eval.department.id
     staff = Staff.objects.filter(management = depart)
-    return render(request, 'answer.html', {'staffs':staff})
+    return render(request, 'answer.html', {'staffs':staff, 'eval':eval})
 
-
+# List Test
+@login_required
+def test(request, id):
+    eval = Evaluation.objects.get(pk=id)
+    quest = Questions.objects.filter(evaluations = id)
+    answer = Answers.objects.all()
+    return render(request, 'test.html', {'eval':eval, 'quests':quest, 'answers':answer})
 
         

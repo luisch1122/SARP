@@ -27,7 +27,7 @@
                 <tr>
                     <td>{{staff.name}}</td>
                     <td>{{staff.last_name}}</td>
-                    <td><a class="btn btn-success" href="">Responder</a></td>
+                    <td><a class="btn btn-success" href="{% url 'test' eval.id %}">Responder</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
