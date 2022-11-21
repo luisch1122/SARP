@@ -16,8 +16,9 @@ class  Staff(models.Model):
     name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.CharField(max_length=100)
-    number = models.IntegerField()
+    number = models.BigIntegerField()
     jobs = models.CharField(max_length=300)
+    evaluation = models.IntegerField(null=True)
     management = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
@@ -40,8 +41,8 @@ class Questions(models.Model):
     value = models.IntegerField()
     evaluations = models.ForeignKey(Evaluation, on_delete=models.CASCADE, null=True, default=None)
 
-    def __str__(self):
-        return f'Pregunta {self.question} Valor {self.value} Evaluacion {self.evaluations}'
+    '''def __str__(self):
+        return f'Pregunta {self.question} Valor {self.value} Evaluacion {self.evaluations}'''
 
 # Models answers
 class Answers(models.Model):

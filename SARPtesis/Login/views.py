@@ -21,7 +21,7 @@ def signin(request):
         if user is None:
             return render(request, 'signin.html', {
             'form': AuthenticationForm,
-            'error': 'Usernamer or Password is incorrect'
+            'error': 'Usuario o Contraseña incorrecta'
             })
         else:
             login(request, user)
@@ -52,12 +52,12 @@ def signup(request):
             except IntegrityError:
                 return render(request, 'create_user.html', {
                     'form': UserCreationForm,
-                    "error": "Username already exists"
+                    "error": "Usuario ya existe"
                 })
 
         return render(request, 'create_user.html', {
             'form': UserCreationForm,
-            "error": "Password do not match"
+            "error": "Las contraseñas no son iguales"
         })
 
 #Delete users
@@ -112,9 +112,11 @@ def create_staff(request):
         return render(request, 'create_staff.html', {'form':StaffForm})
     else:
         form = StaffForm(request.POST)
-        form.save()
-        return redirect('departament')
+        if form.is_valid():
+            form.save()
+            return redirect('departament')
 
+# Edit Staff
 @login_required
 def edit_staff(request, id):
     if request.method == 'GET':
@@ -189,6 +191,12 @@ def test(request, id):
     eval = Evaluation.objects.get(pk=id)
     quest = Questions.objects.filter(evaluations = id)
     answer = Answers.objects.all()
-    return render(request, 'test.html', {'eval':eval, 'quests':quest, 'answers':answer})
 
-        
+    if request.method == 'GET':
+        return render(request, 'test.html', {'eval':eval, 'quests':quest, 'answers':answer})
+    else: 
+        print(request.POST['quests'])
+        resul = request.POST
+        res = list(resul.values())
+        print(res)
+        return redirect('evaluations')

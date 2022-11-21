@@ -13,6 +13,7 @@
     <main class="container bg-light rounded mt-3 shadow p-3 mb-5 bg-body rounded" style="width: 500px;">
         <h1>{{eval}}</h1>
         <form action="" method="POST">
+            {% csrf_token %}
             <table class="table">
                 <thead>
                     <tr>
@@ -26,15 +27,15 @@
                         <td>{{quest.question}}</td>
                         <td>
                             <select name="quests">
-                            {% for answer in answers %}
-                                <option value="{{answer.value}}">{{answer}}</option>
-                            {% endfor %}
+                                <option value="{{quest.value}}">Si</option>
+                                <option value="0">No</option>
                             </select>
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
+            <button class="btn btn-success">Completar</button>
         </form>
     </main>
 
