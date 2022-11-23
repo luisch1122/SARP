@@ -111,6 +111,7 @@ def create_staff(request):
     if request.method == 'GET':
         return render(request, 'create_staff.html', {'form':StaffForm})
     else:
+        print(request.POST)
         form = StaffForm(request.POST)
         if form.is_valid():
             form.save()
@@ -174,7 +175,7 @@ def create_question(request, id):
         )
         instance = quest
         instance.evaluations = Evaluation(id)
-        instance.save()
+        instance.save_base()
         return redirect('evaluations')
 
 # answer
@@ -187,16 +188,22 @@ def answer(request, id):
 
 # List Test
 @login_required
-def test(request, id):
+def test(request, id, id_staff):
     eval = Evaluation.objects.get(pk=id)
     quest = Questions.objects.filter(evaluations = id)
     answer = Answers.objects.all()
+    num = Questions.objects.count()
+    staff = get_object_or_404(Staff, pk=id_staff)
+    value = 0
 
     if request.method == 'GET':
-        return render(request, 'test.html', {'eval':eval, 'quests':quest, 'answers':answer})
+        return render(request, 'test.html', {'eval':eval, 'quests':quest, 'answers':answer, 'value':value})
     else: 
-        print(request.POST['quests'])
-        resul = request.POST
-        res = list(resul.values())
-        print(res)
+        for a in quest:
+            for ques in request.POST[a['id']]:
+                q = int(ques)
+                print(q)
+                value = value + q
+        staff.evaluation = value
+        staff.save()
         return redirect('evaluations')

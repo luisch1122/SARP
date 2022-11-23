@@ -26,9 +26,14 @@
                     <tr>
                         <td>{{quest.question}}</td>
                         <td>
-                            <select name="quests">
-                                <option value="{{quest.value}}">Si</option>
-                                <option value="0">No</option>
+                            <select name="{{quest.id}}">
+                                {% for answer in answers %}
+                                    {% if answer.id == 1 %}
+                                    <option value="{{quest.value}}">{{answer}}</option>
+                                    {% else %}
+                                    <option value="0">{{answer}}</option>
+                                    {% endif %}
+                                {% endfor %}
                             </select>
                         </td>
                     </tr>

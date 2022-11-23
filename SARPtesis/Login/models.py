@@ -47,8 +47,7 @@ class Questions(models.Model):
 # Models answers
 class Answers(models.Model):
     answer = models.CharField(max_length=200)
-    value = models.IntegerField()
-    questions = models.ForeignKey(Questions, on_delete=models.CASCADE, null=True)
+    value = models.IntegerField(null=True)
 
     def __str__(self):
         return f'{self.answer}'
