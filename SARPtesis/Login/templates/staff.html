@@ -9,13 +9,16 @@
 </head>
 <body>
     {% extends 'base.html' %}
+    {% load auth_extras %}
     {% block content %}
 
     <main class="container bg-light rounded mt-3 shadow p-3 mb-5 bg-body rounded">
         <h1>{{departs}}</h1>
+        {% if request.user|has_group:"Admins" %} 
         <a class="btn btn-success" href="{% url 'create_staff'%}">
             Agregar Personal
         </a>
+        {% endif %}
         <table class="table">
             <thead>
                 <tr>
@@ -25,8 +28,10 @@
                     <th scope="col">Telefono</th>
                     <th scope="col">Puesto</th>
                     <th scope="col">Evaluación</th>
+                    {% if request.user|has_group:"Admins" %} 
                     <th></th>
                     <th></th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody>
@@ -38,8 +43,10 @@
                     <td>{{staff.number}}</td>
                     <td>{{staff.jobs}}</td>
                     <td>{{staff.evaluation}}</td>
+                    {% if request.user|has_group:"Admins" %} 
                     <td><a class="btn btn-info" href="{% url 'edit_staff' staff.id%}">Modificar</a></td>
                     <td><a class="btn btn-danger" href="{% url 'delete_staff' staff.id%}">Eliminar</a></td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>

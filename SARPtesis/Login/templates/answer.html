@@ -19,6 +19,7 @@
                 <tr>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
+                    <th scope="col">Evaluacion</th>
                     <th></th>
                 </tr>
             </thead>
@@ -27,11 +28,12 @@
                 <tr>
                     <td>{{staff.name}}</td>
                     <td>{{staff.last_name}}</td>
+                    <td>{{staff.evaluation}}</td>
                     <td><a class="btn btn-success" href="{% url 'test' id=eval.id id_staff=staff.id %}">Responder</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
-          </table>
+        </table>
     </main>
 
     {% endblock %}

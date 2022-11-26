@@ -18,7 +18,7 @@ class  Staff(models.Model):
     email = models.CharField(max_length=100)
     number = models.BigIntegerField()
     jobs = models.CharField(max_length=300)
-    evaluation = models.IntegerField(null=True)
+    evaluation = models.CharField(max_length=50, null=True)
     management = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):

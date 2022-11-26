@@ -192,18 +192,26 @@ def test(request, id, id_staff):
     eval = Evaluation.objects.get(pk=id)
     quest = Questions.objects.filter(evaluations = id)
     answer = Answers.objects.all()
-    num = Questions.objects.count()
     staff = get_object_or_404(Staff, pk=id_staff)
     value = 0
-
+    q_v = 0
     if request.method == 'GET':
         return render(request, 'test.html', {'eval':eval, 'quests':quest, 'answers':answer, 'value':value})
     else: 
-        for a in quest:
-            for ques in request.POST[a['id']]:
+        for a in quest: 
+            val = a.id
+            q_v = a.value + q_v
+            val = str(val)
+            
+            for ques in request.POST[val]:
                 q = int(ques)
-                print(q)
                 value = value + q
-        staff.evaluation = value
+
+        res_value = str(value)
+        quest_value = str(q_v)
+        eval_value = res_value + '/' + quest_value
+        print(eval_value)
+
+        staff.evaluation = eval_value
         staff.save()
         return redirect('evaluations')
