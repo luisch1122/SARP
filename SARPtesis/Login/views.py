@@ -6,6 +6,9 @@ from django.contrib.auth.models import User, Group
 from django.db import IntegrityError
 from Login.models import Department, Staff, Evaluation, Questions, Answers
 from .forms import StaffForm, EvalForm, QuestForm
+import pandas as pd
+from pandas import ExcelWriter
+
 
 # Create your views here.
 
@@ -102,7 +105,6 @@ def departament(request):
 def staff(request, id):
     departs = get_object_or_404(Department, pk=id)
     staff = Staff.objects.filter(management = id)
-    print(staff)
     return render(request, 'staff.html', {'departs':departs, 'staffs':staff})
 
 # Create staff
@@ -215,3 +217,35 @@ def test(request, id, id_staff):
         staff.evaluation = eval_value
         staff.save()
         return redirect('evaluations')
+
+# report
+@login_required
+def report(request, id):
+    departs = get_object_or_404(Department, pk=id)
+    staffs = Staff.objects.filter(management = id)
+    nombre = []
+    apellido = []
+    cargo = []
+    evaluacion = []
+
+    for staff in staffs:
+        nombre.append(staff.name)
+        apellido.append(staff.last_name)
+        cargo.append(staff.jobs)
+        evaluacion.append(staff.evaluation)
+
+
+    df = pd.DataFrame({'Nombre': nombre,
+                        'Apellido': apellido, 
+                        'Cargo': cargo,
+                        'Evaluacion': evaluacion,
+                        'Departamento': departs
+                        })  
+
+    df = df[['Nombre', 'Apellido', 'Cargo', 'Evaluacion', 'Departamento']]
+
+    writer = ExcelWriter('c:/Users/Leo Care Monda/Downloads/ejemplo.xlsx')
+    df.to_excel(writer, 'Hoja de datos', index=False)
+    writer.save()
+
+    return redirect('departament')

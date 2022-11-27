@@ -20,4 +20,5 @@ urlpatterns = [
     path('usuarios/', views.users, name='users'),
     path('usuarios/crear', views.signup, name='sign_up'), 
     path('usarios/<int:id>/delete', views.delete_user, name='delete_user'),
+    path('reporte/<int:id>/', views.report, name='report')
 ]
