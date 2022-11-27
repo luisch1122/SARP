@@ -1,6 +1,97 @@
 
-body {
+.bg-uniq {
     background-image: url("fondo.jpg");
     background-size: cover;
+}
+
+#text-login{
+    font-size: 2.5rem;
+    text-align: center;
+    letter-spacing: 5px;
+    color: white;
+}
+
+.card-login{
+    width: 25rem;
+    background: rgba(99, 99, 99, 0.734);
+    margin: 0 auto;
+    font-family: "Poppins-Medium";
+    border-radius: 5px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0);
+    border: none;
+}
+
+@font-face {
+    font-family: "Poppins-Medium";
+    src: url("Poppins-Medium.ttf");
+    font-weight: bold;
+} 
+
+.login-group{
+    display: flex;
+    margin-bottom: 1em;
+    display: row;
+}
+
+.lbl-login{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(168, 168, 168, 0.763);
+    color:  rgb(238, 238, 57);
+    cursor: pointer;
+    border-radius: 3px 0 0 3px;
+}
+
+.input-login{
+    flex: 1;
+    border: 0;
+    width: 100%;
+    color: gray;
+    font-size: 1rem;
+    padding: 5px;
+    border-radius: 0 3px 3px 0 ;
+    outline: none;
+}
+
+.submit-login{
+    background-color: white;
+    color: black;
+    border:none;
+    padding: 0;
+    box-shadow: 1px 1px 5px rgb(89, 88, 88);
+    letter-spacing: 1px;
+    transition: all .4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    cursor: pointer;
+    display: block;
+}
+
+.submit-login::after{
+    background: white;
+    transform: translateX(-3px);
+    margin-top: 0px;
+}
+
+.submit-login .arrow::before{
+    content: "";
+    transform: rotate(-135deg) translateX(50%);
+    background: transparent;
+    border-left: 1px solid white;
+    border-bottom: 1px solid white;
+    margin-top: -1px;
+}
+
+.submit-login:hover{
+    padding: 0 90px 0 0;
+}
+
+.submit-login:hover::after,
+.submit-login:hover::before{
+    opacity: 1;
+    right: 15px;
 }
 
