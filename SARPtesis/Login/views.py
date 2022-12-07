@@ -200,6 +200,7 @@ def test(request, id, id_staff):
     if request.method == 'GET':
         return render(request, 'test.html', {'eval':eval, 'quests':quest, 'answers':answer, 'value':value})
     else: 
+        print(request.POST)
         for a in quest: 
             val = a.id
             q_v = a.value + q_v
@@ -208,6 +209,7 @@ def test(request, id, id_staff):
             for ques in request.POST[val]:
                 q = int(ques)
                 value = value + q
+                print(q)
 
         res_value = str(value)
         quest_value = str(q_v)

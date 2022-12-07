@@ -1,6 +1,130 @@
 
-body {
+.bg-uniq {
     background-image: url("fondo.jpg");
     background-size: cover;
 }
 
+#login-img{
+    width: 290px;
+    height: 290px;
+    position: absolute;
+    right: 5%;
+}
+
+#logo{
+    position: absolute;
+    left: 10%;
+    padding-top: 200px;
+}
+    
+
+#position-sticky{
+    position: relative;
+}
+
+#text-login{
+    font-size: 2.5rem;
+    text-align: center;
+    letter-spacing: 5px;
+    color: white;
+}
+
+.card-login{
+    width: 25rem;
+    background: rgba(99, 99, 99, 0.734);
+    margin: 0 auto;
+    font-family: "Poppins-Medium";
+    border-radius: 5px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0);
+    border: none;
+}
+
+@font-face {
+    font-family: "Poppins-Medium";
+    src: url("Poppins-Medium.ttf");
+    font-weight: bold;
+} 
+
+.login-group{
+    display: flex;
+    margin-bottom: 1em;
+    display: row;
+}
+
+.lbl-login{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(168, 168, 168, 0.763);
+    color:  rgb(238, 238, 57);
+    cursor: pointer;
+    border-radius: 3px 0 0 3px;
+}
+
+.input-login{
+    flex: 1;
+    border: 0;
+    width: 100%;
+    color: gray;
+    font-size: 1rem;
+    padding: 5px;
+    border-radius: 0 3px 3px 0 ;
+    outline: none;
+}
+
+.submit-login{
+    padding: 3px 3px;
+    background: rgb(255, 255, 255);
+    border:0;
+    color: rgb(0, 0, 0);
+    letter-spacing: 2px;
+    position: relative;
+    transition:         all .4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    cursor: pointer;
+    display: block;
+}
+
+.submit-login::after,
+.submit-login::before{
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translateY(-50%);
+    opacity: 0;
+  transition:         all .4s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.submit-login::after{
+    width: 30px;
+    height: 1px;
+    background: black;
+    transform: translateX(-3px);
+    margin-top: 0px;
+}
+
+.submit-login::before{
+    content: "";
+    transform: rotate(-135deg) translateX(50%);
+    width: 11px;
+    height: 11px;
+    background: transparent;
+    border-left: 1px solid  black;
+    border-bottom: 1px solid    black;
+  margin-top: -1px;
+}
+
+
+.submit-login:hover{
+  padding: 3px 25px 3px 3px;
+}
+
+.submit-login:hover::after,
+.submit-login:hover::before{
+  opacity: 1;
+  right: 15px;
+}

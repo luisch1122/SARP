@@ -26,7 +26,7 @@
                     <h5 class="card-title">{{eval}}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{eval.department}}</h6>
                     <div class="card-text">{{eval.description}}</div>
-                    <a href="{% url 'answer' eval.id %}" class="btn btn-success mb-1 mt-2">Responder</a>
+                    <a href="{% url 'answer' eval.id %}" class="btn btn-warning mb-1 mt-2">Responder</a>
                     {% if request.user|has_group:"Admins" %} 
                     <a href="{% url 'create_question' eval.id %}" class="btn btn-primary mb-1 mt-2">Agregar preguntas</a>
                     <a href="{% url 'delete_evaluation' eval.id %}" class="btn btn-danger mb-1 mt-2">Eliminar </a>
