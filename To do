@@ -1,0 +1,327 @@
+## 1. Análisis y Planificación
+
+- [*] Realizar inventario completo de funcionalidades existentes
+- [*] Modelar la estructura de datos actual
+- [*] Definir la arquitectura de la nueva solución (frontend Angular, backend Java)
+- [ ] Establecer estándares de código para ambas partes
+- [ ] Crear repositorios separados para frontend y backend
+
+## 2. Backend (Java)
+
+### 2.1. Configuración del Proyecto
+
+- [*] Crear proyecto Spring Boot con Maven o Gradle
+- [*] Configurar estructura de paquetes (controllers, services, repositories, models)
+- [*] Configurar conexión a base de datos
+- [ ] Configurar Spring Security para autenticación y autorización
+
+### 2.2. Modelado de Datos
+
+- [ ] Crear entidades JPA basadas en modelos Django existentes
+  - [ ] User/Usuario
+  - [ ] Department/Departamento
+  - [ ] Staff/Empleado
+  - [ ] Evaluation/Evaluación
+  - [ ] Question/Pregunta
+  - [ ] Answer/Respuesta
+- [ ] Definir relaciones entre entidades
+- [ ] Configurar validaciones y restricciones
+
+### 2.3. Desarrollo API REST
+
+- [ ] Crear DTOs (Data Transfer Objects) para cada entidad
+- [ ] Implementar repositorios JPA
+- [ ] Desarrollar capa de servicios con lógica de negocio
+- [ ] Implementar controladores REST:
+  - [ ] AuthenticationController
+  - [ ] DepartmentController
+  - [ ] StaffController
+  - [ ] EvaluationController
+  - [ ] QuestionController
+  - [ ] ReportController
+  - [ ] UserController
+- [ ] Configurar documentación API con Swagger/OpenAPI
+
+### 2.4. Seguridad y Autenticación
+
+- [ ] Implementar autenticación con JWT
+- [ ] Configurar CORS para permitir solicitudes desde Angular
+- [ ] Desarrollar sistema de roles y permisos
+- [ ] Implementar filtros de seguridad
+
+### 2.5. Funcionalidades Específicas
+
+- [ ] Implementar generación de reportes Excel/PDF con Apache POI/iText
+- [ ] Crear servicios para cálculo de evaluaciones
+- [ ] Desarrollar sistema de notificaciones
+- [ ] Implementar logging y auditoría
+
+## 3. Frontend (Angular)
+
+### 3.1. Configuración del Proyecto
+
+- [*] Crear proyecto Angular con Angular CLI
+- [ ] Configurar estructura de módulos
+- [ ] Instalar dependencias (Angular Material, NgRx, etc.)
+- [ ] Configurar proxy para desarrollo
+- [ ] Implementar sistema de temas y estilos globales
+
+### 3.2. Autenticación y Seguridad
+
+- [ ] Crear módulo de autenticación
+- [ ] Implementar interceptores HTTP para tokens JWT
+- [ ] Desarrollar guards para proteger rutas
+- [ ] Crear servicios de autenticación y gestión de sesiones
+
+### 3.3. Componentes Principales
+
+- [ ] Desarrollar layout principal con menú de navegación
+- [ ] Crear módulos y componentes para cada sección:
+  - [ ] Módulo de departamentos
+  - [ ] Módulo de personal
+  - [ ] Módulo de evaluaciones
+  - [ ] Módulo de reportes
+  - [ ] Módulo de administración de usuarios
+- [ ] Implementar componentes reutilizables:
+  - [ ] Tablas con paginación, ordenamiento y filtrado
+  - [ ] Formularios con validación
+  - [ ] Modales de confirmación
+  - [ ] Notificaciones y alertas
+
+### 3.4. Gestión de Estado
+
+- [ ] Configurar NgRx Store para gestión de estado
+- [ ] Definir acciones, reducers y selectores
+- [ ] Implementar efectos para llamadas a la API
+- [ ] Desarrollar state selectors para componentes
+
+### 3.5. Servicios y Comunicación con API
+
+- [ ] Crear servicios para cada entidad del sistema
+- [ ] Implementar manejo de errores HTTP
+- [ ] Desarrollar interceptores para carga y tokens
+- [ ] Configurar gestión de caché según necesidad
+
+## 4. Integración y Pruebas
+
+- [ ] Desarrollar pruebas unitarias para backend (JUnit/Mockito)
+- [ ] Implementar pruebas unitarias para frontend (Jasmine/Karma)
+- [ ] Crear pruebas de integración para endpoints API
+- [ ] Desarrollar pruebas end-to-end con Cypress/Protractor
+- [ ] Configurar CI/CD para ambos proyectos
+- [ ] Implementar sistema de calidad de código (SonarQube)
+
+## 5. Migración de Datos
+
+- [ ] Desarrollar scripts para exportar datos del sistema Django
+- [ ] Crear scripts de importación para nuevo sistema Java
+- [ ] Verificar integridad de datos migrados
+- [ ] Implementar estrategia de migración en producción
+
+## 6. Documentación
+
+- [ ] Crear documentación técnica del backend
+- [ ] Desarrollar documentación del frontend
+- [ ] Elaborar guías de instalación y despliegue
+- [ ] Preparar documentación para usuarios finales
+- [ ] Documentar API con ejemplos de uso
+
+## 7. Despliegue
+
+- [ ] Configurar entorno de desarrollo
+- [ ] Preparar entorno de pruebas/QA
+- [ ] Configurar entorno de producción
+- [ ] Dockerizar aplicaciones para facilitar despliegue
+- [ ] Implementar monitorización (JMX, Prometheus)
+- [ ] Configurar respaldos automáticos
+
+## Consideraciones Adicionales
+
+- El proceso de refactorización debe seguir un enfoque incremental para minimizar riesgos
+- Priorizar la migración de funcionalidades críticas primero
+- Realizar pruebas paralelas del sistema antiguo y nuevo durante la transición
+- Considerar un período de coexistencia donde ambos sistemas funcionen simultáneamente
+- Proporcionar capacitación al equipo de desarrollo en las nuevas tecnologías
+
+Este plan de refactorización permitirá transformar el sistema SARP actual basado en Django a una arquitectura moderna con Angular en el frontend y Java Spring Boot en el backend, mejorando la escalabilidad, mantenibilidad y rendimiento del sistema.
+
+albertoluis-chacon_bbvaemu: puedes poner en un documento el to do que me pasaste?
+
+GitHub Copilot: # Plan de Refactorización del Sistema SARP
+
+**Versión 1.0**  
+**Fecha:** 16/05/2025
+
+## Objetivo
+
+Refactorizar el actual sistema SARP basado en Django (Python) a una arquitectura moderna con:
+- **Frontend**: Angular
+- **Backend**: Java Spring Boot
+
+## Lista de Tareas (TO-DO)
+
+### 1. Análisis y Planificación
+
+- [ ] Realizar inventario completo de funcionalidades existentes
+- [ ] Modelar la estructura de datos actual
+- [ ] Definir la arquitectura de la nueva solución (frontend Angular, backend Java)
+- [ ] Establecer estándares de código para ambas partes
+- [ ] Crear repositorios separados para frontend y backend
+- [ ] Definir estrategia de migración y plan de pruebas
+
+### 2. Backend (Java)
+
+#### 2.1. Configuración del Proyecto
+
+- [ ] Crear proyecto Spring Boot con Maven o Gradle
+- [ ] Configurar estructura de paquetes (controllers, services, repositories, models)
+- [ ] Configurar conexión a base de datos
+- [ ] Implementar sistema de migración de datos (Flyway/Liquibase)
+- [ ] Configurar Spring Security para autenticación y autorización
+
+#### 2.2. Modelado de Datos
+
+- [ ] Crear entidades JPA basadas en modelos Django existentes
+  - [ ] User/Usuario
+  - [ ] Department/Departamento
+  - [ ] Staff/Empleado
+  - [ ] Evaluation/Evaluación
+  - [ ] Question/Pregunta
+  - [ ] Answer/Respuesta
+- [ ] Definir relaciones entre entidades
+- [ ] Configurar validaciones y restricciones
+
+#### 2.3. Desarrollo API REST
+
+- [ ] Crear DTOs (Data Transfer Objects) para cada entidad
+- [ ] Implementar repositorios JPA
+- [ ] Desarrollar capa de servicios con lógica de negocio
+- [ ] Implementar controladores REST:
+  - [ ] AuthenticationController
+  - [ ] DepartmentController
+  - [ ] StaffController
+  - [ ] EvaluationController
+  - [ ] QuestionController
+  - [ ] ReportController
+  - [ ] UserController
+- [ ] Configurar documentación API con Swagger/OpenAPI
+
+#### 2.4. Seguridad y Autenticación
+
+- [ ] Implementar autenticación con JWT
+- [ ] Configurar CORS para permitir solicitudes desde Angular
+- [ ] Desarrollar sistema de roles y permisos
+- [ ] Implementar filtros de seguridad
+
+#### 2.5. Funcionalidades Específicas
+
+- [ ] Implementar generación de reportes Excel/PDF con Apache POI/iText
+- [ ] Crear servicios para cálculo de evaluaciones
+- [ ] Desarrollar sistema de notificaciones
+- [ ] Implementar logging y auditoría
+
+### 3. Frontend (Angular)
+
+#### 3.1. Configuración del Proyecto
+
+- [ ] Crear proyecto Angular con Angular CLI
+- [ ] Configurar estructura de módulos
+- [ ] Instalar dependencias (Angular Material, NgRx, etc.)
+- [ ] Configurar proxy para desarrollo
+- [ ] Implementar sistema de temas y estilos globales
+
+#### 3.2. Autenticación y Seguridad
+
+- [ ] Crear módulo de autenticación
+- [ ] Implementar interceptores HTTP para tokens JWT
+- [ ] Desarrollar guards para proteger rutas
+- [ ] Crear servicios de autenticación y gestión de sesiones
+
+#### 3.3. Componentes Principales
+
+- [ ] Desarrollar layout principal con menú de navegación
+- [ ] Crear módulos y componentes para cada sección:
+  - [ ] Módulo de departamentos
+  - [ ] Módulo de personal
+  - [ ] Módulo de evaluaciones
+  - [ ] Módulo de reportes
+  - [ ] Módulo de administración de usuarios
+- [ ] Implementar componentes reutilizables:
+  - [ ] Tablas con paginación, ordenamiento y filtrado
+  - [ ] Formularios con validación
+  - [ ] Modales de confirmación
+  - [ ] Notificaciones y alertas
+
+#### 3.4. Gestión de Estado
+
+- [ ] Configurar NgRx Store para gestión de estado
+- [ ] Definir acciones, reducers y selectores
+- [ ] Implementar efectos para llamadas a la API
+- [ ] Desarrollar state selectors para componentes
+
+#### 3.5. Servicios y Comunicación con API
+
+- [ ] Crear servicios para cada entidad del sistema
+- [ ] Implementar manejo de errores HTTP
+- [ ] Desarrollar interceptores para carga y tokens
+- [ ] Configurar gestión de caché según necesidad
+
+### 4. Integración y Pruebas
+
+- [ ] Desarrollar pruebas unitarias para backend (JUnit/Mockito)
+- [ ] Implementar pruebas unitarias para frontend (Jasmine/Karma)
+- [ ] Crear pruebas de integración para endpoints API
+- [ ] Desarrollar pruebas end-to-end con Cypress/Protractor
+- [ ] Configurar CI/CD para ambos proyectos
+- [ ] Implementar sistema de calidad de código (SonarQube)
+
+### 5. Migración de Datos
+
+- [ ] Desarrollar scripts para exportar datos del sistema Django
+- [ ] Crear scripts de importación para nuevo sistema Java
+- [ ] Verificar integridad de datos migrados
+- [ ] Implementar estrategia de migración en producción
+
+### 6. Documentación
+
+- [ ] Crear documentación técnica del backend
+- [ ] Desarrollar documentación del frontend
+- [ ] Elaborar guías de instalación y despliegue
+- [ ] Preparar documentación para usuarios finales
+- [ ] Documentar API con ejemplos de uso
+
+### 7. Despliegue
+
+- [ ] Configurar entorno de desarrollo
+- [ ] Preparar entorno de pruebas/QA
+- [ ] Configurar entorno de producción
+- [ ] Dockerizar aplicaciones para facilitar despliegue
+- [ ] Implementar monitorización (JMX, Prometheus)
+- [ ] Configurar respaldos automáticos
+
+## Consideraciones para la Refactorización
+
+- **Enfoque incremental**: Migrar por módulos para minimizar riesgos
+- **Priorización**: Comenzar con funcionalidades críticas
+- **Período de coexistencia**: Mantener ambos sistemas funcionando durante la transición
+- **Pruebas paralelas**: Verificar resultados idénticos en ambos sistemas
+- **Capacitación**: Formar al equipo en las nuevas tecnologías (Angular y Spring Boot)
+
+## Cronograma Tentativo
+
+| Fase | Duración Estimada |
+|------|-------------------|
+| Análisis y Planificación | 2-3 semanas |
+| Desarrollo Backend | 8-10 semanas |
+| Desarrollo Frontend | 8-10 semanas |
+| Integración y Pruebas | 4-6 semanas |
+| Migración de Datos | 2-3 semanas |
+| Documentación | 2-3 semanas |
+| Despliegue | 1-2 semanas |
+
+**Tiempo total estimado:** 27-37 semanas (6-9 meses)
+
+---
+
+**Documento preparado por:** [Nombre del responsable]  
+**Aprobado por:** [Nombre del aprobador]

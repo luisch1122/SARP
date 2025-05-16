@@ -1,0 +1,365 @@
+## 1. Descripción general
+
+El proyecto SARP (Sistema de Administración y Reporte de Personal) es una aplicación web desarrollada con Django que permite gestionar empleados, departamentos, evaluaciones y usuarios dentro de una organización. El sistema permite crear evaluaciones para el personal, responderlas y generar reportes.
+
+## 2. Estructura del Proyecto
+
+El proyecto sigue la estructura estándar de Django:
+
+```
+SARPtesis/
+├── db.sqlite3                  # Base de datos SQLite
+├── manage.py                   # Script para gestionar el proyecto
+├── Login/                      # Aplicación principal
+│   ├── models.py               # Modelos de datos
+│   ├── views.py                # Lógica de las vistas
+│   ├── forms.py                # Formularios
+│   ├── urls.py                 # Configuración de URLs
+│   ├── templates/              # Plantillas HTML
+│   └── static/                 # Archivos estáticos (CSS, JS, imágenes)
+└── SARPtesis/                  # Configuración del proyecto
+    ├── settings.py             # Configuración general
+    ├── urls.py                 # URLs principales
+    ├── wsgi.py                 # Configuración WSGI
+    └── asgi.py                 # Configuración ASGI
+```
+
+## 3. Modelos de Datos
+
+Basándonos en los formularios y templates, los principales modelos son:
+
+- **User**: Usuarios del sistema (utiliza el modelo de Django)
+- **Department**: Departamentos de la organización
+- **Staff**: Empleados asociados a departamentos
+- **Evaluation**: Evaluaciones que pueden ser asignadas a empleados
+- **Questions**: Preguntas asociadas a evaluaciones
+- **Answer**: Posibles respuestas a las preguntas
+
+## 4. Flujo de la Aplicación
+
+### 4.1. Autenticación
+
+1. **Inicio de sesión**: El usuario ingresa sus credenciales en la página de login (signin.html)
+2. **Validación**: Django autentica al usuario
+3. **Redirección**: Si las credenciales son correctas, se redirige a la página de inicio (home.html)
+
+### 4.2. Gestión de Departamentos
+
+1. **Listado**: Se muestran todos los departamentos en departament.html
+2. **Acceso al personal**: Al hacer clic en un departamento, se muestra su personal en staff.html
+
+### 4.3. Gestión de Personal
+
+1. **Listado**: En staff.html se muestra el personal de un departamento específico
+2. **Creación**: Los administradores pueden crear nuevo personal mediante create_staff.html
+3. **Edición**: Los administradores pueden editar el personal existente
+4. **Eliminación**: Los administradores pueden eliminar personal
+
+### 4.4. Gestión de Evaluaciones
+
+1. **Listado**: En evaluations.html se muestran todas las evaluaciones
+2. **Creación**: Los administradores pueden crear evaluaciones con create_evaluation.html
+3. **Eliminación**: Los administradores pueden eliminar evaluaciones
+
+### 4.5. Gestión de Preguntas
+
+1. **Creación**: Los administradores pueden añadir preguntas a una evaluación mediante create_question.html
+2. **Valor**: Cada pregunta tiene un valor asignado para la puntuación
+
+### 4.6. Responder Evaluaciones
+
+1. **Selección**: En answer.html se selecciona al personal que responderá la evaluación
+2. **Respuesta**: En test.html se responden las preguntas de la evaluación
+3. **Almacenamiento**: Las respuestas se guardan y actualizan la puntuación del empleado
+
+### 4.7. Reportes
+
+1. **Generación**: Los administradores pueden generar reportes en Excel mediante la función `report` en views.py
+2. **Descarga**: El reporte se guarda en la ubicación especificada
+
+### 4.8. Gestión de Usuarios
+
+1. **Listado**: Los administradores pueden ver todos los usuarios en users.html
+2. **Creación**: Los administradores pueden crear usuarios mediante create_user.html
+3. **Edición**: Los administradores pueden editar usuarios mediante user_edit.html
+4. **Eliminación**: Los administradores pueden eliminar usuarios
+
+## 5. Control de Acceso
+
+El sistema implementa control de acceso basado en grupos:
+
+- **Admins**: Pueden gestionar usuarios, departamentos, personal, evaluaciones y generar reportes
+- **Usuarios regulares**: Pueden ver departamentos, personal y responder evaluaciones
+
+La verificación de permisos se realiza mediante el filtro personalizado `has_group`:
+```html
+{% if request.user|has_group:"Admins" %}
+    <!-- Contenido solo para administradores -->
+{% endif %}
+```
+
+## 6. Tecnologías Utilizadas
+
+- **Backend**: Django (Python)
+- **Frontend**: HTML, CSS, Bootstrap 5
+- **Base de datos**: SQLite
+- **Reportes**: Pandas y ExcelWriter para generar archivos Excel
+- **Iconos**: FontAwesome
+
+## 7. Funcionalidades Principales
+
+- Autenticación y autorización de usuarios
+- Gestión de departamentos y personal
+- Creación y aplicación de evaluaciones
+- Generación de reportes en Excel
+- Interfaz responsiva con Bootstrap
+
+## 8. Consideraciones Técnicas
+
+- Los archivos estáticos se sirven desde la carpeta `static`, que incluye CSS, imágenes y fuentes
+- El sistema utiliza plantillas base (base.html) para mantener una interfaz consistente
+- Las evaluaciones permiten asignar valores a las preguntas para calcular puntuaciones
+- La integración con Excel permite generar reportes detallados por departamento
+
+## 9. Rutas Principales
+
+- `/`: Página de inicio de sesión
+- `/home`: Página principal después del login
+- `/departamento`: Listado de departamentos
+- `/departamento/<id>/staff`: Personal de un departamento específico
+- `/evaluaciones`: Listado de evaluaciones
+- `/usuarios`: Gestión de usuarios (solo administradores)
+
+## 10. Desarrollo Futuro
+
+- Implementación de gráficos para visualizar resultados de evaluaciones
+- Sistema de notificaciones para nuevas evaluaciones
+- Integración con otros sistemas de RRHH
+- Mejora del sistema de reportes con más opciones de filtrado
+
+
+## 1. Aspectos Técnicos
+
+### 1.1. Arquitectura y Código
+- **Implementar arquitectura de capas**: Separar claramente la lógica de negocio, acceso a datos y presentación
+- **Refactorizar código duplicado**: Buscar patrones repetidos y crear componentes reutilizables
+- **Implementar tests unitarios**: Añadir cobertura de pruebas automatizadas para garantizar la calidad
+- **Aplicar principios SOLID**: Especialmente el principio de responsabilidad única en las clases y funciones
+
+### 1.2. Base de Datos
+- **Migrar a una base de datos más robusta**: Considerar PostgreSQL o MySQL para mayor escalabilidad
+- **Optimizar consultas**: Revisar y mejorar consultas complejas para aumentar rendimiento
+- **Implementar índices**: Añadir índices a campos frecuentemente consultados
+- **Añadir respaldo automático**: Configurar backup periódico de la base de datos
+
+## 2. Funcionalidades
+
+### 2.1. Evaluaciones
+- **Evaluaciones personalizadas**: Permitir crear plantillas específicas por departamento
+- **Sistema de ponderación avanzado**: Incorporar diferentes pesos según categorías de preguntas
+- **Evaluaciones programadas**: Automatizar la creación y asignación de evaluaciones recurrentes
+- **Auto-evaluaciones**: Permitir que los empleados realicen evaluaciones sobre sí mismos
+
+### 2.2. Reportes y Análisis
+- **Dashboard interactivo**: Implementar gráficos y visualizaciones con bibliotecas como Chart.js
+- **Exportación en múltiples formatos**: Añadir PDF, CSV además de Excel
+- **Reportes comparativos**: Evaluar tendencias entre periodos y departamentos
+- **KPIs personalizables**: Permitir a los administradores definir indicadores clave
+
+### 2.3. Gestión de Usuarios
+- **Roles más granulares**: Ampliar los permisos más allá de administradores y usuarios regulares
+- **Autenticación de dos factores**: Mejorar la seguridad de acceso al sistema
+- **Gestión de perfiles**: Permitir a los usuarios personalizar sus perfiles
+- **Historial de actividad**: Registrar acciones importantes de los usuarios
+
+## 3. Experiencia de Usuario
+
+### 3.1. Interfaz
+- **Rediseño con enfoque mobile-first**: Optimizar para dispositivos móviles
+- **Temas personalizables**: Permitir la selección de temas o colores
+- **Accesibilidad**: Cumplir con estándares WCAG para usuarios con discapacidades
+- **Mensajes y notificaciones**: Mejorar el sistema de feedback al usuario
+
+### 3.2. Usabilidad
+- **Wizards para procesos complejos**: Guías paso a paso para creación de evaluaciones
+- **Ayuda contextual**: Añadir tooltips y documentación integrada
+- **Accesos rápidos**: Implementar atajos de teclado y favoritos
+- **Historial y deshacer acciones**: Permitir revertir cambios recientes
+
+## 4. Integración y Escalabilidad
+
+### 4.1. Integración
+- **API RESTful**: Desarrollar endpoints para integración con otros sistemas
+- **Single Sign-On**: Implementar autenticación unificada con otros sistemas empresariales
+- **Integración con herramientas de RRHH**: Conectar con sistemas de nómina y gestión de talento
+- **Webhooks**: Permitir notificaciones a sistemas externos cuando ocurren eventos importantes
+
+### 4.2. Escalabilidad
+- **Implementar caching**: Reducir carga en la base de datos con Redis o Memcached
+- **Servicios asíncronos**: Procesar tareas pesadas en segundo plano con Celery
+- **Contenedores Docker**: Facilitar despliegue y escalado horizontal
+- **Monitoreo y logging**: Implementar sistemas de alerta y registro detallado
+
+## 5. Seguridad
+
+- **Auditoría completa**: Registrar todas las acciones sensibles en el sistema
+- **Cifrado de datos sensibles**: Asegurar información personal según normativas
+- **Validación exhaustiva de entradas**: Prevenir inyecciones SQL y XSS
+- **Políticas de contraseñas**: Implementar requisitos de complejidad y caducidad
+
+Estas mejoras ayudarían a evolucionar SARP hacia un sistema más robusto, seguro y fácil de usar, aumentando su valor para la organización y preparándolo para crecimiento futuro.
+
+## 1. Flujo de Autenticación y Autorización
+
+### Inicio de Sesión
+1. El usuario navega a la página principal (`/`)
+2. Se muestra el formulario de login
+3. El usuario introduce credenciales
+4. La función `signin_view` valida las credenciales
+5. Si son correctas, se crea una sesión y se redirige a `/home`
+6. Si son incorrectas, se muestra un mensaje de error
+
+**Mejoras potenciales:**
+- Implementar bloqueo después de múltiples intentos fallidos
+- Añadir autenticación de dos factores
+- Implementar captcha para prevenir ataques automatizados
+- Registro de intentos de acceso fallidos con IP y timestamp
+
+## 2. Flujo de Gestión de Departamentos
+
+### Listado de Departamentos
+1. El usuario navega a `/departamentos`
+2. La función `departament_view` consulta todos los departamentos
+3. Se renderiza la plantilla mostrando los departamentos en tarjetas
+
+### Creación de Departamentos
+1. El usuario selecciona "Crear Departamento"
+2. La función `create_departament` muestra el formulario
+3. El usuario completa los campos y envía
+4. Se valida el formulario y se crea el departamento
+5. Se redirige al listado de departamentos
+
+**Mejoras potenciales:**
+- Permitir la organización jerárquica de departamentos (subdepartamentos)
+- Añadir búsqueda y filtrado avanzado
+- Implementar estadísticas rápidas por departamento
+- Permitir asignar managers a departamentos
+
+## 3. Flujo de Gestión de Personal
+
+### Listado de Personal
+1. El usuario selecciona un departamento
+2. La función `staff_view` consulta el personal asociado
+3. Se muestra la lista de empleados del departamento
+
+### Creación de Personal
+1. El usuario selecciona "Añadir Empleado"
+2. La función `create_staff` muestra el formulario
+3. El usuario completa datos y selecciona departamento
+4. Se valida y guarda el nuevo empleado
+5. Se redirige al listado de personal
+
+**Mejoras potenciales:**
+- Importación masiva de personal mediante CSV
+- Historial de departamentos por empleado
+- Registro de habilidades y competencias
+- Sistema de expedientes digitales
+
+## 4. Flujo de Evaluaciones
+
+### Creación de Evaluaciones
+1. El usuario navega a `/evaluaciones`
+2. Selecciona "Crear Evaluación"
+3. La función `create_evaluation` muestra el formulario
+4. El usuario define nombre, descripción y tipo
+5. Se crea la evaluación y se redirige a creación de preguntas
+
+### Gestión de Preguntas
+1. El usuario selecciona "Añadir Pregunta"
+2. La función `create_question` muestra el formulario
+3. El usuario define la pregunta, opciones y valor
+4. Se guarda la pregunta asociada a la evaluación
+
+### Aplicación de Evaluaciones
+1. El usuario selecciona "Evaluar Personal"
+2. La función `answer_view` muestra la lista de empleados
+3. El usuario selecciona empleado y evaluación
+4. La función `test_view` muestra las preguntas
+5. El usuario completa las respuestas y envía
+6. Se calculan resultados y se almacenan
+
+**Mejoras potenciales:**
+- Evaluaciones periódicas automáticas
+- Notificaciones por email al asignar evaluaciones
+- Preguntas condicionales basadas en respuestas previas
+- Evaluaciones 360° con participación de compañeros
+- Historial de evaluaciones por empleado
+
+## 5. Flujo de Reportes
+
+### Generación de Reportes
+1. El usuario navega a sección de reportes
+2. Selecciona filtros (departamento, periodo, etc.)
+3. La función `report` consulta los datos necesarios
+4. Se genera archivo Excel con los resultados
+5. Se ofrece descarga al usuario
+
+**Mejoras potenciales:**
+- Dashboard interactivo con gráficos
+- Programación de reportes automáticos
+- Múltiples formatos de exportación (PDF, CSV)
+- Reportes comparativos entre periodos
+- Indicadores de rendimiento personalizables
+
+## 6. Flujo de Administración de Usuarios
+
+### Gestión de Usuarios
+1. El administrador navega a `/usuarios`
+2. La función `users_view` muestra todos los usuarios
+3. El administrador puede crear, editar o eliminar
+
+### Creación de Usuarios
+1. El administrador selecciona "Crear Usuario"
+2. La función `create_user` muestra el formulario
+3. Se completan datos y asigna grupo (Admin/Regular)
+4. Se crea usuario y se envía notificación
+
+**Mejoras potenciales:**
+- Roles más granulares con permisos específicos
+- Gestión de permisos por módulo
+- Autoservicio para reseteo de contraseñas
+- Sincronización con directorio activo/LDAP
+
+## 7. Mejoras Generales del Sistema
+
+### Arquitectura y Rendimiento
+- Refactorizar hacia arquitectura de microservicios
+- Implementar caché para consultas frecuentes
+- Optimizar consultas a base de datos
+- Migrar a base de datos escalable (PostgreSQL)
+
+### Seguridad
+- Implementar HTTPS con certificados válidos
+- Protección contra CSRF, XSS e inyección SQL
+- Cifrado de datos sensibles
+- Auditoría completa de acciones en el sistema
+
+### Experiencia de Usuario
+- Diseño responsive optimizado para móviles
+- Modo oscuro/claro
+- Notificaciones en tiempo real con WebSockets
+- Accesibilidad (WCAG 2.1)
+
+### Infraestructura
+- Containerización con Docker
+- CI/CD para despliegue automatizado
+- Monitorización con Prometheus/Grafana
+- Backups automáticos programados
+
+### Integración
+- API RESTful para integración con otros sistemas
+- Webhooks para notificaciones externas
+- Integración con sistemas de RRHH existentes
+- Autenticación SSO (Single Sign-On)
+
+La implementación de estas mejoras aumentaría significativamente el valor del sistema SARP, permitiendo una gestión más eficiente del personal, mejores insights para la toma de decisiones y una experiencia de usuario optimizada.
