@@ -3,8 +3,8 @@
 - [*] Realizar inventario completo de funcionalidades existentes
 - [*] Modelar la estructura de datos actual
 - [*] Definir la arquitectura de la nueva solución (frontend Angular, backend Java)
-- [ ] Establecer estándares de código para ambas partes
-- [ ] Crear repositorios separados para frontend y backend
+- [*] Establecer estándares de código para ambas partes
+- [*] Crear repositorios separados para frontend y backend
 
 ## 2. Backend (Java)
 
@@ -13,14 +13,14 @@
 - [*] Crear proyecto Spring Boot con Maven o Gradle
 - [*] Configurar estructura de paquetes (controllers, services, repositories, models)
 - [*] Configurar conexión a base de datos
-- [ ] Configurar Spring Security para autenticación y autorización
+- [*] Configurar Spring Security para autenticación y autorización
 
 ### 2.2. Modelado de Datos
 
-- [ ] Crear entidades JPA basadas en modelos Django existentes
-  - [ ] User/Usuario
+- [*] Crear entidades JPA basadas en modelos Django existentes
+  - [*] User/Usuario
   - [ ] Department/Departamento
-  - [ ] Staff/Empleado
+  - [*] Staff/Empleado
   - [ ] Evaluation/Evaluación
   - [ ] Question/Pregunta
   - [ ] Answer/Respuesta
@@ -29,25 +29,25 @@
 
 ### 2.3. Desarrollo API REST
 
-- [ ] Crear DTOs (Data Transfer Objects) para cada entidad
+- [*] Crear DTOs (Data Transfer Objects) para cada entidad
 - [ ] Implementar repositorios JPA
 - [ ] Desarrollar capa de servicios con lógica de negocio
-- [ ] Implementar controladores REST:
+- [*] Implementar controladores REST:
   - [ ] AuthenticationController
   - [ ] DepartmentController
   - [ ] StaffController
   - [ ] EvaluationController
   - [ ] QuestionController
   - [ ] ReportController
-  - [ ] UserController
+  - [*] UserController
 - [ ] Configurar documentación API con Swagger/OpenAPI
 
 ### 2.4. Seguridad y Autenticación
 
-- [ ] Implementar autenticación con JWT
-- [ ] Configurar CORS para permitir solicitudes desde Angular
-- [ ] Desarrollar sistema de roles y permisos
-- [ ] Implementar filtros de seguridad
+- [*] Implementar autenticación con JWT
+- [*] Configurar CORS para permitir solicitudes desde Angular
+- [*] Desarrollar sistema de roles y permisos
+- [*] Implementar filtros de seguridad
 
 ### 2.5. Funcionalidades Específicas
 
@@ -61,7 +61,7 @@
 ### 3.1. Configuración del Proyecto
 
 - [*] Crear proyecto Angular con Angular CLI
-- [ ] Configurar estructura de módulos
+- [*] Configurar estructura de módulos
 - [ ] Instalar dependencias (Angular Material, NgRx, etc.)
 - [ ] Configurar proxy para desarrollo
 - [ ] Implementar sistema de temas y estilos globales

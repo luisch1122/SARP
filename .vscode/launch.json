@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-V2Application<v2>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.sarp.v2.V2Application",
+            "projectName": "v2",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

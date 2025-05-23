@@ -19,6 +19,7 @@ import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
 import static jakarta.persistence.GenerationType.*;
 
 
@@ -47,13 +48,6 @@ public class User implements IUser {
     @NotBlank
     private String password;
 
-    @Transient
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private boolean admin;
-
-    @NotBlank
-    private List<Role> role;
-
     @NotBlank
     private String phone;
 
@@ -63,6 +57,10 @@ public class User implements IUser {
     @NotBlank
     private String job;
 
+    @Transient
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private boolean admin;
+
     @JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -71,6 +69,8 @@ public class User implements IUser {
         inverseJoinColumns = @JoinColumn(name = "role_id"),
         uniqueConstraints = { @UniqueConstraint(columnNames = {"user_id", "role_id"}) }
     )
+
+    private List<Role> roles;
 
     public Long getId() {
         return id;
@@ -129,11 +129,11 @@ public class User implements IUser {
     }
 
     public List<Role> getRole() {
-        return role;
+        return roles;
     }
 
-    public void setRole(List<Role> role) {
-        this.role = role;
+    public void setRole(List<Role> roles) {
+        this.roles = roles;
     }
 
     public String getPhone() {
