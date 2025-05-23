@@ -54,9 +54,6 @@ public class User implements IUser {
     @NotBlank 
     private String address;
 
-    @NotBlank
-    private String job;
-
     @Transient
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private boolean admin;
@@ -71,6 +68,17 @@ public class User implements IUser {
     )
 
     private List<Role> roles;
+
+    @JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "users_departments",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "department_id"),
+        uniqueConstraints = { @UniqueConstraint(columnNames = {"user_id", "department_id"}) }
+    )
+
+    private List<Departments> departments;
 
     public Long getId() {
         return id;
@@ -152,16 +160,13 @@ public class User implements IUser {
         this.address = address;
     }
 
-    public String getJob() {
-        return job;
+    public List<Departments> getDepartments() {
+        return departments;
     }
 
-    public void setJob(String job) {
-        this.job = job;
+    public void setDepartments(List<Departments> departments) {
+        this.departments = departments;
     }
 
-  
-
-    
 
 }
